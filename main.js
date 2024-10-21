@@ -10,11 +10,20 @@ sizeSelector.addEventListener('change', function () {
 
     productPrice.textContent = `$${selectedPrice}`;  // Update the price
 
-    // if else statement for denying purchase if the selected size is out of stock
-    if (availability === 'out-of-stock') {
-        purchaseButton.disabled = true;
+    // Disable the button if the selected size is out of stock
+    purchaseButton.disabled = (availability === 'out-of-stock');
+});
+
+// Add event listener for the purchase button
+purchaseButton.addEventListener('click', function () {
+    const selectedOption = sizeSelector.options[sizeSelector.selectedIndex];
+    const availability = selectedOption.getAttribute('data-availability'); // Get availability status
+
+    // if else statement for if availability is in stock and logs different statements for both
+    if (availability === 'in-stock') {
+        console.log('Thank you for your purchase!');
     } else {
-        purchaseButton.disabled = false;
+        console.log('This product is currently out of stock and cannot be purchased.');
     }
 });
 
